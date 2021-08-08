@@ -13,53 +13,56 @@ class GildedRose {
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
+            updateQualityOfItem(items[i]);
+        }
+    }
 
-            if (!items[i].name.equals(agedBrie)
-                    && !items[i].name.equals(backstagePasses)) {
-                if (items[i].quality > 0) {
-                    if (!items[i].name.equals(sulfuras)) {
-                        this.decreaseQuality(items[i]);
-                    }
+    private void updateQualityOfItem(Item item) {
+        if (!item.name.equals(agedBrie)
+                && !item.name.equals(backstagePasses)) {
+            if (item.quality > 0) {
+                if (!item.name.equals(sulfuras)) {
+                    this.decreaseQuality(item);
                 }
-            } else {
-                if (items[i].quality < 50) {
-                    this.increaseQuality(items[i]);
+            }
+        } else {
+            if (item.quality < 50) {
+                this.increaseQuality(item);
 
-                    if (items[i].name.equals(backstagePasses)) {
-                        if (items[i].sellIn < 11) {
-                            if (items[i].quality < 50) {
-                                this.increaseQuality(items[i]);
-                            }
+                if (item.name.equals(backstagePasses)) {
+                    if (item.sellIn < 11) {
+                        if (item.quality < 50) {
+                            this.increaseQuality(item);
                         }
+                    }
 
-                        if (items[i].sellIn < 6) {
-                            if (items[i].quality < 50) {
-                                this.increaseQuality(items[i]);
-                            }
+                    if (item.sellIn < 6) {
+                        if (item.quality < 50) {
+                            this.increaseQuality(item);
                         }
                     }
                 }
             }
+        }
 
-            if (!items[i].name.equals(sulfuras)) {
-                this.decreaseSellIn(items[i]);
-            }
+        if (!item.name.equals(sulfuras)) {
+            this.decreaseSellIn(item);
+        }
 
-            if (items[i].sellIn < 0) {
-                if (!items[i].name.equals(agedBrie)) {
-                    if (!items[i].name.equals(backstagePasses)) {
-                        if (items[i].quality > 0) {
-                            if (!items[i].name.equals(sulfuras)) {
-                                this.decreaseQuality(items[i]);
-                            }
+        if (item.sellIn < 0) {
+            if (!item.name.equals(agedBrie)) {
+                if (!item.name.equals(backstagePasses)) {
+                    if (item.quality > 0) {
+                        if (!item.name.equals(sulfuras)) {
+                            this.decreaseQuality(item);
                         }
-                    } else {
-                        items[i].quality = items[i].quality - items[i].quality;
                     }
                 } else {
-                    if (items[i].quality < 50) {
-                        this.increaseQuality(items[i]);
-                    }
+                    item.quality = item.quality - item.quality;
+                }
+            } else {
+                if (item.quality < 50) {
+                    this.increaseQuality(item);
                 }
             }
         }
