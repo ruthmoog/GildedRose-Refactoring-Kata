@@ -22,18 +22,18 @@ class GildedRose {
                 }
             } else {
                 if (items[i].quality < 50) {
-                    items[i].quality = items[i].quality + 1;
+                    this.increaseQuality(items[i]);
 
                     if (items[i].name.equals(backstagePasses)) {
                         if (items[i].sellIn < 11) {
                             if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
+                                this.increaseQuality(items[i]);
                             }
                         }
 
                         if (items[i].sellIn < 6) {
                             if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
+                                this.increaseQuality(items[i]);
                             }
                         }
                     }
@@ -57,11 +57,15 @@ class GildedRose {
                     }
                 } else {
                     if (items[i].quality < 50) {
-                        items[i].quality = items[i].quality + 1;
+                        this.increaseQuality(items[i]);
                     }
                 }
             }
         }
+    }
+
+    private void increaseQuality(Item item) {
+        item.quality++;
     }
 
     private void decreaseQuality(Item item) {
