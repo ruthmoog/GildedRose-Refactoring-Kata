@@ -3,15 +3,16 @@ package com.gildedrose;
 class GildedRose {
     Item[] items;
 
+    static String backstagePasses = "Backstage passes to a TAFKAL80ETC concert";
+    static String agedBrie = "Aged Brie";
+    static String sulfuras = "Sulfuras, Hand of Ragnaros";
+
     public GildedRose(Item[] items) {
         this.items = items;
     }
 
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
-            String backstagePasses = "Backstage passes to a TAFKAL80ETC concert";
-            String agedBrie = "Aged Brie";
-            String sulfuras = "Sulfuras, Hand of Ragnaros";
 
             if (!items[i].name.equals(agedBrie)
                     && !items[i].name.equals(backstagePasses)) {
