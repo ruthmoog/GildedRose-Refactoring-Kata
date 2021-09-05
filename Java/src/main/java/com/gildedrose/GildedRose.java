@@ -36,11 +36,7 @@ class GildedRose {
                 }
             }
         } else {
-            if (!isBackstagePasses) {
-                if (item.quality > 0 && !isSulfuras) {
-                    this.decreaseQuality(item);
-                }
-            } else {
+            if (isBackstagePasses) {
                 if (item.quality < 50) {
                     this.increaseQuality(item);
 
@@ -52,19 +48,28 @@ class GildedRose {
                         this.increaseQuality(item);
                     }
                 }
-            }
 
-            if (!isSulfuras) {
-                this.decreaseSellIn(item);
-            }
+                if (!isSulfuras) {
+                    this.decreaseSellIn(item);
+                }
 
-            if (item.sellIn < 0) {
-                if (!isBackstagePasses) {
+                if (item.sellIn < 0) {
+                    item.quality = 0;
+                }
+            }
+            else {
+                if (item.quality > 0 && !isSulfuras) {
+                    this.decreaseQuality(item);
+                }
+
+                if (!isSulfuras) {
+                    this.decreaseSellIn(item);
+                }
+
+                if (item.sellIn < 0) {
                     if (item.quality > 0 && !isSulfuras) {
                         this.decreaseQuality(item);
                     }
-                } else {
-                    item.quality = 0;
                 }
             }
         }
