@@ -58,18 +58,23 @@ class GildedRose {
                 }
             }
             else {
-                if (item.quality > 0 && !isSulfuras) {
-                    this.decreaseQuality(item);
-                }
+                if (isSulfuras) {
 
-                if (!isSulfuras) {
-                    this.decreaseSellIn(item);
                 }
-
-                if (item.sellIn < 0) {
-                    if (item.quality > 0 && !isSulfuras) {
+                else
+                {
+                    if (item.quality > 0) {
                         this.decreaseQuality(item);
                     }
+
+                    this.decreaseSellIn(item);
+
+                    if (item.sellIn < 0) {
+                        if (item.quality > 0) {
+                            this.decreaseQuality(item);
+                        }
+                    }
+
                 }
             }
         }
