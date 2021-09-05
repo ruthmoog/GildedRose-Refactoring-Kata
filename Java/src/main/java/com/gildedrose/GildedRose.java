@@ -3,10 +3,6 @@ package com.gildedrose;
 class GildedRose {
     Item[] items;
 
-    static String backstagePasses = "Backstage passes to a TAFKAL80ETC concert";
-    static String agedBrie = "Aged Brie";
-    static String sulfuras = "Sulfuras, Hand of Ragnaros";
-
     public GildedRose(Item[] items) {
         this.items = items;
     }
@@ -18,25 +14,20 @@ class GildedRose {
     }
 
     private void updateQualityOfItem(Item item) {
-        boolean isAgedBrie = item.name.equals(agedBrie);
-        boolean isBackstagePasses = item.name.equals(backstagePasses);
-        boolean isSulfuras = item.name.equals(sulfuras);
 
-        if (isAgedBrie) {
-            if (item.quality < 50) {
-                this.increaseQuality(item);
-
-            }
-
-            this.decreaseSellIn(item);
-
-            if (item.sellIn < 0) {
+        switch (item.name) {
+            case "Aged Brie":
                 if (item.quality < 50) {
                     this.increaseQuality(item);
                 }
-            }
-        } else {
-            if (isBackstagePasses) {
+
+                this.decreaseSellIn(item);
+
+                if (item.sellIn < 0 && item.quality < 50) {
+                    this.increaseQuality(item);
+                }
+                break;
+            case "Backstage passes to a TAFKAL80ETC concert":
                 if (item.quality < 50) {
                     this.increaseQuality(item);
 
@@ -49,34 +40,25 @@ class GildedRose {
                     }
                 }
 
-                if (!isSulfuras) {
-                    this.decreaseSellIn(item);
-                }
+                this.decreaseSellIn(item);
 
                 if (item.sellIn < 0) {
                     item.quality = 0;
                 }
-            }
-            else {
-                if (isSulfuras) {
-
+                break;
+            case "Sulfuras, Hand of Ragnaros":
+                break;
+            default:
+                if (item.quality > 0) {
+                    this.decreaseQuality(item);
                 }
-                else
-                {
-                    if (item.quality > 0) {
-                        this.decreaseQuality(item);
-                    }
 
-                    this.decreaseSellIn(item);
+                this.decreaseSellIn(item);
 
-                    if (item.sellIn < 0) {
-                        if (item.quality > 0) {
-                            this.decreaseQuality(item);
-                        }
-                    }
-
+                if (item.sellIn < 0 && item.quality > 0) {
+                    this.decreaseQuality(item);
                 }
-            }
+                break;
         }
     }
 
