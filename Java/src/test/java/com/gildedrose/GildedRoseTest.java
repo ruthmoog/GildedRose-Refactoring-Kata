@@ -15,7 +15,7 @@ class GildedRoseTest {
     }
 
     private String doUpdateQuality(String name, Integer sellIn, Integer quality) {
-        Item[] items = new Item[] { new Item(name, sellIn, quality) };
+        Item[] items = new Item[] {Item.createItem(name, sellIn, quality)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
 
